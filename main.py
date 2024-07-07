@@ -1,7 +1,35 @@
-
+import numpy as np
 import pandas as pd
 import time
 import matplotlib.pyplot as plt
+import datetime
+from datetime import datetime, date
+import yfinance as yf
+
+def get_stock_data(ticker, start, end):
+    data = yf.download(ticker, start, end)
+    data.insert(0, "Ticker", ticker)
+    return data
+
+pd.set_option('display.notebook_repr_html',False)
+pd.set_option('display.max_columns',10)
+pd.set_option('display.max_rows',10)
+pd.set_option('display.width',100)
+
+start = datetime(2024, 6, 1)
+end = datetime(2024, 7, 8)
+df = get_stock_data("BAC", start, end)
+
+print(df.tail(200))
+df.to_csv("Ticker Info.csv")
+
+df['Adj Close'].plot()
+
+plt.show()
+
+# df.info()
+
+'''
 
 start_time = time.time() #Fixing start time
 
@@ -15,6 +43,7 @@ count_rec = df.shape[0]
 for i in range(0, count_rec):
     df.loc[i, 'Close'] = df.loc[i, 'Close'].replace(",",".")
 df['Close'] = pd.to_numeric(df.Close)
+
 
 df["Vector"] = 0.00 # Создаем столбец Vector и заполняем его 0
 df["Pattern"] = 0 # Создаем столбец для фиксации паттернов с кол-вом точек
@@ -97,3 +126,5 @@ plt.show()
 print("")
 print ("Time elapsed: {:.2f}s".format(time.time() - start_time)) # How long script worked in second
 df.to_csv("Res.csv")
+
+'''
