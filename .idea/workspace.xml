@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f182fa7f-06eb-4562-8759-d00d85e62ed1" name="Changes" comment="3 Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Res.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ticker Info.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VOO.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +32,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
@@ -104,7 +108,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>55</line>
+          <line>84</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

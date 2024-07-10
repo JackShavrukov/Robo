@@ -3,29 +3,58 @@ import pandas as pd
 import time
 import matplotlib.pyplot as plt
 import datetime
-from datetime import datetime, date
 import yfinance as yf
+import os.path
+from os import path
 
 def get_stock_data(ticker, start, end):
     data = yf.download(ticker, start, end)
     data.insert(0, "Ticker", ticker)
     return data
 
-pd.set_option('display.notebook_repr_html',False)
-pd.set_option('display.max_columns',10)
-pd.set_option('display.max_rows',10)
-pd.set_option('display.width',100)
+def open_ticker_file(ticker): #Function for open or create DataFrame for Ticker
+    if not path.exists(ticker+'.csv'): # If not file
+        df = yf.download(ticker) # Read data from Yahoo
+        df.to_csv(ticker+'.csv') # Write data to file
+        print('Create new file for '+ticker) # Info
+    print('File for '+ticker+' is present!') #Info
+    return pd.read_csv(ticker+'.csv')
 
-start = datetime(2024, 6, 1)
-end = datetime(2024, 7, 8)
-df = get_stock_data("BAC", start, end)
+def open_tickers_list(tickerslist): # Funtion create or open Tickers list
+    if not path.exists(tickerslist):  # Create file - Tickers.csv
+        df_baset = pd.DataFrame({'Ticker': ['GOOG', 'MSFT']})  # Create DataFrame with basic Tickers
+        df_baset.to_csv(tickerslist)  # Create File - Tickers.csv with basic tickers
+    return pd.read_csv(tickerslist)  # Read file Tickers to DataFrame
+
+# Start Main Block
+df_tickers = open_tickers_list("Tickers.csv") # Open tickers list
+for i in range(0, df_tickers.shape[0]): # Selecting tickers one by one
+    current_ticker = df_tickers.loc[i, 'Ticker'] # Select current ticker
+    print(i,' = ', current_ticker) #Info
+    df_curr_tick = open_ticker_file(current_ticker) # Open DataFrame for current Ticker
+    print(df_curr_tick) #Info
+
+
+
+start = datetime.date(2024, 7, 5).strftime('%Y-%m-%d')
+end = (datetime.date.today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+
+print(start)
+print(end)
+
+#df = get_stock_data("BAC", start, end)
+
+#print(df.tail(200))
+#df.to_csv("Ticker Info.csv")
+
+df = yf.download('BAC',start, end)
+del df['Volume']
 
 print(df.tail(200))
 df.to_csv("Ticker Info.csv")
 
-df['Adj Close'].plot()
-
-plt.show()
+# df['Adj Close'].plot()
+# plt.show()
 
 # df.info()
 
